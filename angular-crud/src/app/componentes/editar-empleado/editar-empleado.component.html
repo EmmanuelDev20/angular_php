@@ -3,14 +3,14 @@
     Editar empleado
   </div>
   <div class="card-body">
-    <form>
+    <form [formGroup]="formularioDeEmpleados">
       <div class="mb-3">
         <label for="nombre" class="form-label">Nombre:</label>
-        <input type="text" class="form-control" id="nombre" aria-describedby="nombre" placeholder="Escribe tu nombre">
+        <input formControlName="nombre" type="text" class="form-control" id="nombre" aria-describedby="nombre" placeholder="Escribe tu nombre">
       </div>
       <div class="mb-3">
         <label for="correo" class="form-label">Correo:</label>
-        <input type="email" class="form-control" id="correo" placeholder="Escribe tu correo">
+        <input formControlName="correo" type="email" class="form-control" id="correo" placeholder="Escribe tu correo">
       </div>
       <div class="btn-group" role="group" aria-label="Agregar o cancelar">
         <button type="button" class="btn btn-dark">Cancelar</button>
