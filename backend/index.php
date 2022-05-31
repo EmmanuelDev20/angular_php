@@ -21,7 +21,7 @@ if (isset($_GET["consultar"])){
         echo json_encode($empleaados);
         exit();
     }
-    else{  echo json_encode(["success"=>0]); }
+    else{ echo json_encode(["success"=>0]); }
 }
 //borrar pero se le debe de enviar una clave ( para borrado )
 if (isset($_GET["borrar"])){
