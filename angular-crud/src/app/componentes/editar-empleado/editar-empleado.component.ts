@@ -8,36 +8,47 @@ import { Router, ActivatedRoute } from '@angular/router';
   templateUrl: './editar-empleado.component.html',
   styleUrls: ['./editar-empleado.component.css']
 })
+
 export class EditarEmpleadoComponent implements OnInit {
 
+  formularioDeEmpleados:FormGroup; 
+
   elID: any;
-  formularioDeEmpleados:FormGroup;
 
   constructor(
-    public formulario: FormBuilder,
     private activeRoute: ActivatedRoute,
-    private crudService: CrudService
+    private crudService:CrudService,
+    public formulario:FormBuilder,
+    private ruteador:Router
   ) {
     this.elID = this.activeRoute.snapshot.paramMap.get('id');
     console.log(this.elID);
     
-    this.crudService.ObtenerEmpleado(this.elID).subscribe(respuesta => {
-      console.log(respuesta);
-      this.formularioDeEmpleados.setValue({
-        nombre:respuesta[0]['nombre'],
-        correo:respuesta[0]['correo']
-      });
-  }
-};
-
-this.formularioDeEmpleados = this.formulario.group(
-  {
-    nombre: [''],
-    correo: ['']
-  }
-);
+    this.crudService.ObtenerEmpleado(this.elID).subscribe(
+      respuesta => {
+        console.log(respuesta);
+        this.formularioDeEmpleados.setValue({
+          nombre:respuesta[0]['nombre'],
+          correo:respuesta[0]['correo']
+        });
+      }
+    );
+    this.formularioDeEmpleados = this.formulario.group({
+      nombre:[''],
+      correo:['']
+    });
+    
+}
 
 ngOnInit(): void {
+}
+
+enviarDatos():any{
+  console.log(this.elID)
+  console.log(this.formularioDeEmpleados.value)
+  this.crudService.ActualizarEmpleado(this.formularioDeEmpleados.value, this.elID).subscribe(()=>{
+    this.ruteador.navigateByUrl('/listar-empleado');
+  });
 }
 
 }

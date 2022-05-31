@@ -7,7 +7,7 @@ import { Empleado } from './Empleado';
   providedIn: 'root'
 })
 export class CrudService {
-  API: string='http://localhost/angular_php/backend/';
+  API: string = 'http://localhost/angular_php/backend/';
 
   constructor(private clienteHttp:HttpClient) { }
 
@@ -25,6 +25,10 @@ export class CrudService {
 
   ObtenerEmpleado(id:any):Observable<any>{
     return this.clienteHttp.get(this.API+"?consultar="+id);
+  }
+
+  ActualizarEmpleado(datosEmpleado:any, id:any):Observable<any>{
+    return this.clienteHttp.post(this.API+"?actualizar="+id, datosEmpleado);
   }
 
 }
